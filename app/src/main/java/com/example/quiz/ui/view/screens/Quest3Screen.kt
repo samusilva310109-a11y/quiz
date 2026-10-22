@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.example.quiz.ui.view.components.CardQuest
 import com.example.quiz.ui.view.components.LogoApp
 import com.example.quiz.ui.view.components.TagQuest
-import com.example.quiz.ui.viewModel.Alternativa
+import com.example.quiz.ui.model.Alternativa
+import com.example.quiz.ui.model.ResultadoFinal
 
 @Preview(
     showBackground = true,
@@ -23,7 +24,7 @@ import com.example.quiz.ui.viewModel.Alternativa
 )
 
 @Composable
-fun Quest3Screen(modifier: Modifier = Modifier) {
+fun Quest3Screen(modifier: Modifier = Modifier, resultadoFinal: ResultadoFinal) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -44,6 +45,6 @@ fun Quest3Screen(modifier: Modifier = Modifier) {
         LogoApp(tamanho = 50.dp)
         Spacer(Modifier.height(20.dp))
         TagQuest(numberQuest = 3, numberOfQuestions = 3)
-        CardQuest(titulo = "Assinale a alternativa correta sobre o tesouro IPCA+", alternativas = alternativas)
+        CardQuest(titulo = "Assinale a alternativa correta sobre o tesouro IPCA+", alternativas = alternativas, pontos = 20, resultadoFinalObject = resultadoFinal)
     }
 }

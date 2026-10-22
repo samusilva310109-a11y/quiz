@@ -1,6 +1,7 @@
 package com.example.quiz.ui.view.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,15 +15,20 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.quiz.ui.viewModel.Alternativa
+import com.example.quiz.ui.model.Alternativa
+import com.example.quiz.ui.model.ResultadoFinal
 
 @Composable
-fun CardQuest(modifier: Modifier = Modifier, alternativas: List<Alternativa>, titulo:String) {
+fun CardQuest(modifier: Modifier = Modifier, alternativas: List<Alternativa>, titulo:String, pontos: Int, resultadoFinalObject: ResultadoFinal) {
 
     Card(
         modifier
@@ -48,7 +54,7 @@ fun CardQuest(modifier: Modifier = Modifier, alternativas: List<Alternativa>, ti
             Spacer(Modifier.height(20.dp))
 
             for (alternativa in alternativas){
-                CardOptions(alternativa = alternativa)
+                ButtonOption(alternativa = alternativa, pontos = pontos, resultadoFinalObject = resultadoFinalObject)
             }
         }
     }
@@ -56,12 +62,19 @@ fun CardQuest(modifier: Modifier = Modifier, alternativas: List<Alternativa>, ti
 }
 
 @Composable
-fun CardOptions(modifier: Modifier = Modifier, alternativa: Alternativa) {
+fun ButtonOption(modifier: Modifier = Modifier, alternativa: Alternativa, pontos: Int, resultadoFinalObject: ResultadoFinal) {
+    var corFundo by remember {
+        mutableStateOf(Color.White)
+    }
+
     OutlinedButton(
         onClick = {
-
+            resultadoFinalObject.verificarResposta(alternativa, pontos)
+            if (alternativa.isCorreta){
+                corFundo = Color.Green
+            }
         },
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().background(color = corFundo),
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, Color(0xFFDBDBDB))
     ) {
