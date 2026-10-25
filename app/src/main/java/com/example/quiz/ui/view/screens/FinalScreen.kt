@@ -21,24 +21,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.quiz.ui.model.ResultadoFinal
 import com.example.quiz.ui.view.components.LogoApp
 
-@Preview(
-    showBackground = true,
-    showSystemUi = true
-)
+
 @Composable
-fun FinalScreen(modifier: Modifier = Modifier) {
+fun FinalScreen(modifier: Modifier = Modifier, resultadoFinalObject: ResultadoFinal, navController: NavController) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LogoApp(tamanho = 90.dp)
-
         Spacer(Modifier.height(25.dp))
+
+        LogoApp(tamanho = 90.dp)
+        Spacer(Modifier.height(25.dp))
+
 
         Column(
             modifier = Modifier
@@ -46,7 +46,6 @@ fun FinalScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(200.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             Card(
                 modifier = modifier.size(height = 50.dp, width = 250.dp),
@@ -62,18 +61,26 @@ fun FinalScreen(modifier: Modifier = Modifier) {
                 ) {
                     Text(
                         text = "Bom Trabalho!",
+                        color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Medium
                         )
                 }
             }
 
-            Spacer(Modifier.height(25.dp))
+            Text(
+                text = "Você acertou ${resultadoFinalObject.alternativasCorretas} de 3 Perguntas",
+                fontSize = 20.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Medium
+            )
+
+            Spacer(Modifier.height(2.dp))
 
             Text(
-                text = "Você acertou 1 de 3 Perguntas",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Medium
+                text = "SUA PONTUAÇÃO: ${resultadoFinalObject.pontos}",
+                fontSize = 19.sp,
+                color = Color.Black,
             )
         }
 
@@ -81,7 +88,9 @@ fun FinalScreen(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-
+                navController.navigate("InitialScreen")
+                resultadoFinalObject.alternativasCorretas = 0
+                resultadoFinalObject.pontos = 0
             },
             modifier = Modifier.width(200.dp),
             colors = ButtonDefaults.buttonColors(

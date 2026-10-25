@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import com.example.quiz.ui.view.components.LogoApp
 
 @Composable
-fun InitialScreen(modifier: Modifier = Modifier, navController: NavController?) {
+fun InitialScreen(modifier: Modifier = Modifier, navController: NavController) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -46,7 +46,7 @@ fun InitialScreen(modifier: Modifier = Modifier, navController: NavController?) 
 
         Button(
             onClick = {
-                navController?.navigate("Quest1-Screen")
+                navController.navigate("Quest1")
             },
             modifier = Modifier.width(200.dp),
             colors = ButtonDefaults.buttonColors(

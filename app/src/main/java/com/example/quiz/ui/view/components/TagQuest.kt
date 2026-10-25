@@ -15,11 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-//
-//@Preview(
-//    showBackground = true,
-//    showSystemUi = true
-//)
 @Composable
 fun TagQuest(modifier: Modifier = Modifier, numberQuest:Int, numberOfQuestions: Int) {
     Card(
@@ -36,7 +31,8 @@ fun TagQuest(modifier: Modifier = Modifier, numberQuest:Int, numberOfQuestions: 
         ) {
             Text(
                 text = "Pergunta $numberQuest de $numberOfQuestions",
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = Color.Black
             )
         }
     }
